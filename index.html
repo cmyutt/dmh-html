@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intro Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffffff;
+            font-family: 'Anton', sans-serif;
+            cursor: pointer;
+            overflow: hidden;
+            position: relative;
+        }
+        .logo {
+            text-align: center;
+            color: #F4F4F3;
+            text-shadow: 2px 1px 2px rgba(0, 0, 0, 0.5);
+            line-height: 1;
+            transition: opacity 3s ease;
+            position: absolute;
+            z-index: 2;
+        }
+        .logo .main-text {
+            font-size: 64px;
+            font-weight: bold;
+        }
+        .logo .sub-text {
+            font-size: 64px;
+            font-weight: normal;
+        }
+        .fade-out {
+            opacity: 0;
+        }
+        iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            opacity: 0;
+            transition: opacity 4s ease;
+            z-index: 1;
+        }
+        iframe.visible {
+            opacity: 1;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+</head>
+<body onclick="startTransition()">
+    <!-- 클릭 가능한 로고 -->
+    <div class="logo" id="logo">
+        <div class="main-text">DMH</div>
+        <div class="sub-text">THE RECLUSE</div>
+    </div>
+    <!-- 메인 페이지를 iframe으로 로드 -->
+    <iframe src="main.html" id="mainPage"></iframe>
+
+    <script>
+        function startTransition() {
+            const logo = document.getElementById('logo');
+            const mainPage = document.getElementById('mainPage');
+
+            // 인트로 페이지 흐려지기
+            logo.classList.add('fade-out');
+
+            // 2초 후 메인 페이지 점점 진해지기
+            setTimeout(() => {
+                mainPage.classList.add('visible');
+            }, 2000);
+
+            // 3초 후 인트로 페이지가 완전히 사라짐
+            setTimeout(() => {
+                document.body.removeChild(logo);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

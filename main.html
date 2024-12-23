@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List</title>
+    <style>
+        /* Reset 기본 스타일 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body 스타일 */
+        body {
+            background-color: #ffffff; /* 흰색 배경 */
+            font-family: 'Anton', sans-serif; /* 기본 글꼴 */
+            opacity: 0; /* 초기 상태를 투명으로 설정 */
+            transition: opacity 1s ease-in-out; /* 페이드인 효과 */
+        }
+
+        body.visible {
+            opacity: 1; /* 점점 진해지는 효과 */
+        }
+
+        /* 헤더 스타일 */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 115px; /* 헤더 높이 */
+            padding: 0 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .header .logo {
+            font-size: 30px; /* 로고 크기 */
+            color: #F4F4F3; /* 텍스트 색상 */
+            text-shadow: 2px 1px 2px rgba(0, 0, 0, 0.5); /* 드롭쉐도우 */
+        }
+
+        .header .menu-icon,
+        .header .user-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header .menu-icon svg,
+        .header .user-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: #F4F4F3; /* 아이콘 색상 */
+            filter: drop-shadow(2px 1px 2px rgba(0, 0, 0, 0.5)); /* 드롭쉐도우 */
+        }
+
+        /* 상품 리스트 스타일 */
+        .product-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .product-item {
+            text-align: center;
+        }
+
+        .product-item .product-image {
+            width: 100%;
+            height: 150px;
+            background-color: #d0d0d0;
+            margin-bottom: 10px;
+        }
+
+        .product-item .product-name {
+            font-size: 14px;
+            font-weight: bold;
+            color: #333333;
+        }
+
+        .product-item .product-price {
+            font-size: 12px;
+            color: #666666;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 헤더 -->
+    <header class="header">
+        <div class="menu-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M3 6h18v2H3zM3 12h18v2H3zM3 18h18v2H3z"/>
+            </svg>
+        </div>
+        <div class="logo">DMH THE RECLUSE</div>
+        <div class="user-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <circle cx="12" cy="8" r="4"/>
+                <path d="M2 20c0-5.33 4.67-8 10-8s10 2.67 10 8H2z"/>
+            </svg>
+        </div>
+    </header>
+
+    <!-- 상품 리스트 -->
+    <main class="product-list">
+        <div class="product-item">
+            <div class="product-image"></div>
+            <div class="product-name">DMH - Z/001</div>
+            <div class="product-price">$299</div>
+        </div>
+        <div class="product-item">
+            <div class="product-image"></div>
+            <div class="product-name">DMH - Z/001</div>
+            <div class="product-price">$299</div>
+        </div>
+        <div class="product-item">
+            <div class="product-image"></div>
+            <div class="product-name">DMH - Z/001</div>
+            <div class="product-price">$299</div>
+        </div>
+        <div class="product-item">
+            <div class="product-image"></div>
+            <div class="product-name">DMH - Z/001</div>
+            <div class="product-price">$299</div>
+        </div>
+    </main>
+
+    <script>
+        // 페이지 로드 시 body에 visible 클래스 추가
+        document.addEventListener('DOMContentLoaded', () => {
+            document.body.classList.add('visible');
+        });
+    </script>
+</body>
+</html>
