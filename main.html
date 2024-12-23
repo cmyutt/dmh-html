@@ -19,6 +19,22 @@
             overflow-x: hidden; /* 화면이 밀리는 효과를 위한 설정 */
         }
 
+        /* 터치 방지 오버레이 */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.0); /* 투명한 배경 */
+            z-index: 999;
+            display: none;
+        }
+
+        .overlay.active {
+            display: block; /* 활성화 시 터치 방지 */
+        }
+
         /* 헤더 스타일 */
         .header {
             display: flex;
@@ -191,6 +207,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- 터치 방지 오버레이 -->
+    <div class="overlay" id="overlay"></div>
+
     <!-- 헤더 -->
     <header class="header" id="header">
         <div class="menu-icon" id="menuIcon" onclick="openMenu()">
@@ -257,11 +276,13 @@
             const mainContent = document.getElementById('mainContent');
             const header = document.getElementById('header');
             const menuIcon = document.getElementById('menuIcon');
+            const overlay = document.getElementById('overlay');
 
             menuScreen.classList.add('active');
             mainContent.classList.add('shifted-menu');
             header.classList.add('shifted-menu');
             menuIcon.classList.add('hidden');
+            overlay.classList.add('active');
         }
 
         function closeMenu() {
@@ -269,11 +290,13 @@
             const mainContent = document.getElementById('mainContent');
             const header = document.getElementById('header');
             const menuIcon = document.getElementById('menuIcon');
+            const overlay = document.getElementById('overlay');
 
             menuScreen.classList.remove('active');
             mainContent.classList.remove('shifted-menu');
             header.classList.remove('shifted-menu');
             menuIcon.classList.remove('hidden');
+            overlay.classList.remove('active');
         }
 
         function openMypage() {
@@ -281,11 +304,13 @@
             const mainContent = document.getElementById('mainContent');
             const header = document.getElementById('header');
             const userIcon = document.getElementById('userIcon');
+            const overlay = document.getElementById('overlay');
 
             mypageScreen.classList.add('active');
             mainContent.classList.add('shifted-mypage');
             header.classList.add('shifted-mypage');
             userIcon.classList.add('hidden');
+            overlay.classList.add('active');
         }
 
         function closeMypage() {
@@ -293,11 +318,13 @@
             const mainContent = document.getElementById('mainContent');
             const header = document.getElementById('header');
             const userIcon = document.getElementById('userIcon');
+            const overlay = document.getElementById('overlay');
 
             mypageScreen.classList.remove('active');
             mainContent.classList.remove('shifted-mypage');
             header.classList.remove('shifted-mypage');
             userIcon.classList.remove('hidden');
+            overlay.classList.remove('active');
         }
     </script>
 </body>
