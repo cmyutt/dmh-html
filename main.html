@@ -27,6 +27,15 @@
             height: 115px; /* 헤더 높이 */
             padding: 0 20px;
             border-bottom: 1px solid #e0e0e0;
+            transition: transform 0.8s ease; /* 헤더 이동 효과 */
+        }
+
+        .header.shifted-menu {
+            transform: translateX(30%); /* 화면의 중앙 크기 이동 */
+        }
+
+        .header.shifted-mypage {
+            transform: translateX(-30%); /* 마이페이지 이동 효과 */
         }
 
         .header .logo {
@@ -43,6 +52,18 @@
             align-items: center;
             justify-content: center;
             cursor: pointer; /* 클릭 가능하도록 설정 */
+            transition: opacity 0.8s ease; /* 흐려짐 효과 */
+        }
+
+        .header .menu-icon.hidden,
+        .header .user-icon.hidden {
+            opacity: 0; /* 사라지도록 설정 */
+            pointer-events: none; /* 클릭 불가능하도록 설정 */
+        }
+
+        .header .menu-icon.visible,
+        .header .user-icon.visible {
+            opacity: 1; /* 다시 나타나도록 설정 */
         }
 
         .header .menu-icon svg,
@@ -57,8 +78,8 @@
         .menu-screen {
             position: fixed;
             top: 0;
-            left: -25%; /* 화면 밖에서 시작 */
-            width: 25%; /* 화면의 4/1 */
+            left: -30%; /* 화면 밖에서 시작 */
+            width: 30%; /* 3.5/1 크기 */
             height: 100%;
             background-color: #ffffff; /* 배경색 */
             box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
@@ -93,8 +114,8 @@
         .mypage-screen {
             position: fixed;
             top: 0;
-            right: -25%; /* 화면 밖에서 시작 */
-            width: 25%; /* 화면의 4/1 */
+            right: -30%; /* 화면 밖에서 시작 */
+            width: 30%; /* 3.5/1 크기 */
             height: 100%;
             background-color: #ffffff; /* 배경색 */
             box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
@@ -130,11 +151,11 @@
         }
 
         .main-content.shifted-menu {
-            transform: translateX(25%); /* 화면의 4/1만큼 이동 */
+            transform: translateX(30%); /* 화면의 중앙 크기 이동 */
         }
 
         .main-content.shifted-mypage {
-            transform: translateX(-25%); /* 마이페이지 이동 효과 */
+            transform: translateX(-30%); /* 마이페이지 이동 효과 */
         }
 
         /* 상품 리스트 스타일 */
@@ -171,14 +192,14 @@
 </head>
 <body>
     <!-- 헤더 -->
-    <header class="header">
-        <div class="menu-icon" onclick="openMenu()">
+    <header class="header" id="header">
+        <div class="menu-icon" id="menuIcon" onclick="openMenu()">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <path d="M3 6h18v2H3zM3 12h18v2H3zM3 18h18v2H3z"/>
             </svg>
         </div>
         <div class="logo">DMH THE RECLUSE</div>
-        <div class="user-icon" onclick="openMypage()">
+        <div class="user-icon" id="userIcon" onclick="openMypage()">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <circle cx="12" cy="8" r="4"/>
                 <path d="M6 20c0-6 4-8 6-8s6 2 6 8H6z"/> <!-- 몸통을 약간 아래로 늘림 -->
@@ -234,29 +255,49 @@
         function openMenu() {
             const menuScreen = document.getElementById('menuScreen');
             const mainContent = document.getElementById('mainContent');
+            const header = document.getElementById('header');
+            const menuIcon = document.getElementById('menuIcon');
+
             menuScreen.classList.add('active');
             mainContent.classList.add('shifted-menu');
+            header.classList.add('shifted-menu');
+            menuIcon.classList.add('hidden');
         }
 
         function closeMenu() {
             const menuScreen = document.getElementById('menuScreen');
             const mainContent = document.getElementById('mainContent');
+            const header = document.getElementById('header');
+            const menuIcon = document.getElementById('menuIcon');
+
             menuScreen.classList.remove('active');
             mainContent.classList.remove('shifted-menu');
+            header.classList.remove('shifted-menu');
+            menuIcon.classList.remove('hidden');
         }
 
         function openMypage() {
             const mypageScreen = document.getElementById('mypageScreen');
             const mainContent = document.getElementById('mainContent');
+            const header = document.getElementById('header');
+            const userIcon = document.getElementById('userIcon');
+
             mypageScreen.classList.add('active');
             mainContent.classList.add('shifted-mypage');
+            header.classList.add('shifted-mypage');
+            userIcon.classList.add('hidden');
         }
 
         function closeMypage() {
             const mypageScreen = document.getElementById('mypageScreen');
             const mainContent = document.getElementById('mainContent');
+            const header = document.getElementById('header');
+            const userIcon = document.getElementById('userIcon');
+
             mypageScreen.classList.remove('active');
             mainContent.classList.remove('shifted-mypage');
+            header.classList.remove('shifted-mypage');
+            userIcon.classList.remove('hidden');
         }
     </script>
 </body>
