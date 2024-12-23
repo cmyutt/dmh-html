@@ -16,12 +16,7 @@
         body {
             background-color: #ffffff; /* 흰색 배경 */
             font-family: 'Anton', sans-serif; /* 기본 글꼴 */
-            opacity: 0; /* 초기 상태를 투명으로 설정 */
-            transition: opacity 1s ease-in-out; /* 페이드인 효과 */
-        }
-
-        body.visible {
-            opacity: 1; /* 점점 진해지는 효과 */
+            overflow-x: hidden; /* 화면이 밀리는 효과를 위한 설정 */
         }
 
         /* 헤더 스타일 */
@@ -42,11 +37,12 @@
 
         .header .menu-icon,
         .header .user-icon {
-            width: 24px;
-            height: 24px;
+            width: 32px; /* 아이콘 크기 */
+            height: 32px;
             display: flex;
             align-items: center;
             justify-content: center;
+            cursor: pointer; /* 클릭 가능하도록 설정 */
         }
 
         .header .menu-icon svg,
@@ -55,6 +51,90 @@
             height: 100%;
             fill: #F4F4F3; /* 아이콘 색상 */
             filter: drop-shadow(2px 1px 2px rgba(0, 0, 0, 0.5)); /* 드롭쉐도우 */
+        }
+
+        /* 메뉴 화면 스타일 */
+        .menu-screen {
+            position: fixed;
+            top: 0;
+            left: -25%; /* 화면 밖에서 시작 */
+            width: 25%; /* 화면의 4/1 */
+            height: 100%;
+            background-color: #ffffff; /* 배경색 */
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+            transition: left 0.8s ease; /* 슬라이드 효과 */
+            z-index: 1000;
+        }
+
+        .menu-screen.active {
+            left: 0; /* 화면 안으로 이동 */
+        }
+
+        .menu-back {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer; /* 클릭 가능하도록 설정 */
+        }
+
+        .menu-back svg {
+            width: 100%;
+            height: 100%;
+            fill: #F4F4F3;
+            filter: drop-shadow(2px 1px 2px rgba(0, 0, 0, 0.5));
+        }
+
+        /* 마이페이지 화면 스타일 */
+        .mypage-screen {
+            position: fixed;
+            top: 0;
+            right: -25%; /* 화면 밖에서 시작 */
+            width: 25%; /* 화면의 4/1 */
+            height: 100%;
+            background-color: #ffffff; /* 배경색 */
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+            transition: right 0.8s ease; /* 슬라이드 효과 */
+            z-index: 1000;
+        }
+
+        .mypage-screen.active {
+            right: 0; /* 화면 안으로 이동 */
+        }
+
+        .mypage-back {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer; /* 클릭 가능하도록 설정 */
+        }
+
+        .mypage-back svg {
+            width: 100%;
+            height: 100%;
+            fill: #F4F4F3;
+            filter: drop-shadow(2px 1px 2px rgba(0, 0, 0, 0.5));
+        }
+
+        .main-content {
+            transition: transform 0.8s ease; /* 메인 페이지 밀림 효과 */
+        }
+
+        .main-content.shifted-menu {
+            transform: translateX(25%); /* 화면의 4/1만큼 이동 */
+        }
+
+        .main-content.shifted-mypage {
+            transform: translateX(-25%); /* 마이페이지 이동 효과 */
         }
 
         /* 상품 리스트 스타일 */
@@ -92,49 +172,92 @@
 <body>
     <!-- 헤더 -->
     <header class="header">
-        <div class="menu-icon">
+        <div class="menu-icon" onclick="openMenu()">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <path d="M3 6h18v2H3zM3 12h18v2H3zM3 18h18v2H3z"/>
             </svg>
         </div>
         <div class="logo">DMH THE RECLUSE</div>
-        <div class="user-icon">
+        <div class="user-icon" onclick="openMypage()">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <circle cx="12" cy="8" r="4"/>
-                <path d="M2 20c0-5.33 4.67-8 10-8s10 2.67 10 8H2z"/>
+                <path d="M6 20c0-6 4-8 6-8s6 2 6 8H6z"/> <!-- 몸통을 약간 아래로 늘림 -->
             </svg>
         </div>
     </header>
 
-    <!-- 상품 리스트 -->
-    <main class="product-list">
-        <div class="product-item">
-            <div class="product-image"></div>
-            <div class="product-name">DMH - Z/001</div>
-            <div class="product-price">$299</div>
+    <!-- 메뉴 화면 -->
+    <div class="menu-screen" id="menuScreen">
+        <div class="menu-back" onclick="closeMenu()">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6z"/>
+            </svg>
         </div>
-        <div class="product-item">
-            <div class="product-image"></div>
-            <div class="product-name">DMH - Z/001</div>
-            <div class="product-price">$299</div>
+    </div>
+
+    <!-- 마이페이지 화면 -->
+    <div class="mypage-screen" id="mypageScreen">
+        <div class="mypage-back" onclick="closeMypage()">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/>
+            </svg>
         </div>
-        <div class="product-item">
-            <div class="product-image"></div>
-            <div class="product-name">DMH - Z/001</div>
-            <div class="product-price">$299</div>
-        </div>
-        <div class="product-item">
-            <div class="product-image"></div>
-            <div class="product-name">DMH - Z/001</div>
-            <div class="product-price">$299</div>
-        </div>
-    </main>
+    </div>
+
+    <!-- 메인 콘텐츠 -->
+    <div class="main-content" id="mainContent">
+        <main class="product-list">
+            <div class="product-item">
+                <div class="product-image"></div>
+                <div class="product-name">DMH - Z/001</div>
+                <div class="product-price">$299</div>
+            </div>
+            <div class="product-item">
+                <div class="product-image"></div>
+                <div class="product-name">DMH - Z/001</div>
+                <div class="product-price">$299</div>
+            </div>
+            <div class="product-item">
+                <div class="product-image"></div>
+                <div class="product-name">DMH - Z/001</div>
+                <div class="product-price">$299</div>
+            </div>
+            <div class="product-item">
+                <div class="product-image"></div>
+                <div class="product-name">DMH - Z/001</div>
+                <div class="product-price">$299</div>
+            </div>
+        </main>
+    </div>
 
     <script>
-        // 페이지 로드 시 body에 visible 클래스 추가
-        document.addEventListener('DOMContentLoaded', () => {
-            document.body.classList.add('visible');
-        });
+        function openMenu() {
+            const menuScreen = document.getElementById('menuScreen');
+            const mainContent = document.getElementById('mainContent');
+            menuScreen.classList.add('active');
+            mainContent.classList.add('shifted-menu');
+        }
+
+        function closeMenu() {
+            const menuScreen = document.getElementById('menuScreen');
+            const mainContent = document.getElementById('mainContent');
+            menuScreen.classList.remove('active');
+            mainContent.classList.remove('shifted-menu');
+        }
+
+        function openMypage() {
+            const mypageScreen = document.getElementById('mypageScreen');
+            const mainContent = document.getElementById('mainContent');
+            mypageScreen.classList.add('active');
+            mainContent.classList.add('shifted-mypage');
+        }
+
+        function closeMypage() {
+            const mypageScreen = document.getElementById('mypageScreen');
+            const mainContent = document.getElementById('mainContent');
+            mypageScreen.classList.remove('active');
+            mainContent.classList.remove('shifted-mypage');
+        }
     </script>
 </body>
 </html>
