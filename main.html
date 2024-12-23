@@ -19,22 +19,6 @@
             overflow-x: hidden; /* 화면이 밀리는 효과를 위한 설정 */
         }
 
-        /* 터치 방지 오버레이 */
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.0); /* 투명한 배경 */
-            z-index: 999;
-            display: none;
-        }
-
-        .overlay.active {
-            display: block; /* 활성화 시 터치 방지 */
-        }
-
         /* 헤더 스타일 */
         .header {
             display: flex;
@@ -47,39 +31,29 @@
         }
 
         .header.shifted-menu {
-            transform: translateX(30%); /* 화면의 중앙 크기 이동 */
+            transform: translateX(30%);
         }
 
         .header.shifted-mypage {
-            transform: translateX(-30%); /* 마이페이지 이동 효과 */
+            transform: translateX(-30%);
         }
 
         .header .logo {
-            font-size: 30px; /* 로고 크기 */
-            color: #F4F4F3; /* 텍스트 색상 */
-            text-shadow: 2px 1px 2px rgba(0, 0, 0, 0.5); /* 드롭쉐도우 */
+            font-size: 36px; /* 로고 크기 */
+            color: #F4F4F3;
+            text-shadow: 2px 1px 2px rgba(0, 0, 0, 0.5);
+            font-family: 'Anton', sans-serif; /* 로고 폰트 복구 */
         }
 
         .header .menu-icon,
         .header .user-icon {
-            width: 32px; /* 아이콘 크기 */
-            height: 32px;
+            width: 40px; /* 아이콘 크기 */
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer; /* 클릭 가능하도록 설정 */
-            transition: opacity 0.8s ease; /* 흐려짐 효과 */
-        }
-
-        .header .menu-icon.hidden,
-        .header .user-icon.hidden {
-            opacity: 0; /* 사라지도록 설정 */
-            pointer-events: none; /* 클릭 불가능하도록 설정 */
-        }
-
-        .header .menu-icon.visible,
-        .header .user-icon.visible {
-            opacity: 1; /* 다시 나타나도록 설정 */
+            cursor: pointer;
+            transition: opacity 0.8s ease;
         }
 
         .header .menu-icon svg,
@@ -87,24 +61,24 @@
             width: 100%;
             height: 100%;
             fill: #F4F4F3; /* 아이콘 색상 */
-            filter: drop-shadow(2px 1px 2px rgba(0, 0, 0, 0.5)); /* 드롭쉐도우 */
+            filter: drop-shadow(2px 1px 2px rgba(0, 0, 0, 0.5));
         }
 
         /* 메뉴 화면 스타일 */
         .menu-screen {
             position: fixed;
             top: 0;
-            left: -30%; /* 화면 밖에서 시작 */
-            width: 30%; /* 3.5/1 크기 */
+            left: -30%;
+            width: 30%;
             height: 100%;
-            background-color: #ffffff; /* 배경색 */
+            background-color: #ffffff;
             box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
-            transition: left 0.8s ease; /* 슬라이드 효과 */
+            transition: left 0.8s ease;
             z-index: 1000;
         }
 
         .menu-screen.active {
-            left: 0; /* 화면 안으로 이동 */
+            left: 0;
         }
 
         .menu-back {
@@ -116,7 +90,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer; /* 클릭 가능하도록 설정 */
+            cursor: pointer;
         }
 
         .menu-back svg {
@@ -130,17 +104,17 @@
         .mypage-screen {
             position: fixed;
             top: 0;
-            right: -30%; /* 화면 밖에서 시작 */
-            width: 30%; /* 3.5/1 크기 */
+            right: -30%;
+            width: 30%;
             height: 100%;
-            background-color: #ffffff; /* 배경색 */
+            background-color: #ffffff;
             box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
-            transition: right 0.8s ease; /* 슬라이드 효과 */
+            transition: right 0.8s ease;
             z-index: 1000;
         }
 
         .mypage-screen.active {
-            right: 0; /* 화면 안으로 이동 */
+            right: 0;
         }
 
         .mypage-back {
@@ -152,7 +126,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer; /* 클릭 가능하도록 설정 */
+            cursor: pointer;
         }
 
         .mypage-back svg {
@@ -163,53 +137,62 @@
         }
 
         .main-content {
-            transition: transform 0.8s ease; /* 메인 페이지 밀림 효과 */
+            transition: transform 0.8s ease;
         }
 
         .main-content.shifted-menu {
-            transform: translateX(30%); /* 화면의 중앙 크기 이동 */
+            transform: translateX(30%);
         }
 
         .main-content.shifted-mypage {
-            transform: translateX(-30%); /* 마이페이지 이동 효과 */
+            transform: translateX(-30%);
         }
 
-        /* 상품 리스트 스타일 */
-        .product-list {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            padding: 20px;
+        /* 추가된 제품 섹션 스타일 */
+        .product-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px; /* 제품 간 간격 */
+            margin-top: 30px; /* 헤더 경계에서 30px 아래 */
         }
 
-        .product-item {
-            text-align: center;
+        .product-box {
+            width: 155px;
+            height: 215px; /* 높이를 기존 195px에서 215px로 증가 */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
         }
 
-        .product-item .product-image {
+        .product-image {
+            width: 155px;
+            height: 195px; /* 네모 도형의 높이를 유지 */
+            background-color: #d0d0d0; /* 회색 배경 */
+            margin-bottom: 10px; /* 상품 이름과의 간격 */
+        }
+
+        .product-info {
+            text-align: left;
             width: 100%;
-            height: 150px;
-            background-color: #d0d0d0;
-            margin-bottom: 10px;
         }
 
-        .product-item .product-name {
+        .product-name {
+            font-family: 'Instrument Sans', sans-serif;
+            font-size: 18px;
+            font-weight: 400; /* Regular */
+            margin-bottom: 10px; /* 가격과의 간격 */
+        }
+
+        .product-price {
+            font-family: 'Instrument Sans', sans-serif;
             font-size: 14px;
-            font-weight: bold;
-            color: #333333;
-        }
-
-        .product-item .product-price {
-            font-size: 12px;
-            color: #666666;
+            font-weight: 600; /* Semibold */
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600&family=Anton&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- 터치 방지 오버레이 -->
-    <div class="overlay" id="overlay"></div>
-
     <!-- 헤더 -->
     <header class="header" id="header">
         <div class="menu-icon" id="menuIcon" onclick="openMenu()">
@@ -221,7 +204,7 @@
         <div class="user-icon" id="userIcon" onclick="openMypage()">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <circle cx="12" cy="8" r="4"/>
-                <path d="M6 20c0-6 4-8 6-8s6 2 6 8H6z"/> <!-- 몸통을 약간 아래로 늘림 -->
+                <path d="M6 20c0-6 4-8 6-8s6 2 6 8H6z"/>
             </svg>
         </div>
     </header>
@@ -246,28 +229,23 @@
 
     <!-- 메인 콘텐츠 -->
     <div class="main-content" id="mainContent">
-        <main class="product-list">
-            <div class="product-item">
+        <!-- 추가된 제품 섹션 -->
+        <div class="product-container">
+            <div class="product-box">
                 <div class="product-image"></div>
-                <div class="product-name">DMH - Z/001</div>
-                <div class="product-price">$299</div>
+                <div class="product-info">
+                    <div class="product-name">DMH - Z/001</div>
+                    <div class="product-price">$500</div>
+                </div>
             </div>
-            <div class="product-item">
+            <div class="product-box">
                 <div class="product-image"></div>
-                <div class="product-name">DMH - Z/001</div>
-                <div class="product-price">$299</div>
+                <div class="product-info">
+                    <div class="product-name">DMH - Z/001</div>
+                    <div class="product-price">$500</div>
+                </div>
             </div>
-            <div class="product-item">
-                <div class="product-image"></div>
-                <div class="product-name">DMH - Z/001</div>
-                <div class="product-price">$299</div>
-            </div>
-            <div class="product-item">
-                <div class="product-image"></div>
-                <div class="product-name">DMH - Z/001</div>
-                <div class="product-price">$299</div>
-            </div>
-        </main>
+        </div>
     </div>
 
     <script>
@@ -276,13 +254,11 @@
             const mainContent = document.getElementById('mainContent');
             const header = document.getElementById('header');
             const menuIcon = document.getElementById('menuIcon');
-            const overlay = document.getElementById('overlay');
 
             menuScreen.classList.add('active');
             mainContent.classList.add('shifted-menu');
             header.classList.add('shifted-menu');
             menuIcon.classList.add('hidden');
-            overlay.classList.add('active');
         }
 
         function closeMenu() {
@@ -290,13 +266,11 @@
             const mainContent = document.getElementById('mainContent');
             const header = document.getElementById('header');
             const menuIcon = document.getElementById('menuIcon');
-            const overlay = document.getElementById('overlay');
 
             menuScreen.classList.remove('active');
             mainContent.classList.remove('shifted-menu');
             header.classList.remove('shifted-menu');
             menuIcon.classList.remove('hidden');
-            overlay.classList.remove('active');
         }
 
         function openMypage() {
@@ -304,13 +278,11 @@
             const mainContent = document.getElementById('mainContent');
             const header = document.getElementById('header');
             const userIcon = document.getElementById('userIcon');
-            const overlay = document.getElementById('overlay');
 
             mypageScreen.classList.add('active');
             mainContent.classList.add('shifted-mypage');
             header.classList.add('shifted-mypage');
             userIcon.classList.add('hidden');
-            overlay.classList.add('active');
         }
 
         function closeMypage() {
@@ -318,13 +290,11 @@
             const mainContent = document.getElementById('mainContent');
             const header = document.getElementById('header');
             const userIcon = document.getElementById('userIcon');
-            const overlay = document.getElementById('overlay');
 
             mypageScreen.classList.remove('active');
             mainContent.classList.remove('shifted-mypage');
             header.classList.remove('shifted-mypage');
             userIcon.classList.remove('hidden');
-            overlay.classList.remove('active');
         }
     </script>
 </body>
